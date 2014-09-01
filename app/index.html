@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>EmberRouterLayer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{BASE_TAG}}
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/ember-router-layer.css">
+  </head>
+  <body>
+    <script>
+      window.EmberRouterLayerENV = {{ENV}};
+      window.EmberENV = window.EmberRouterLayerENV.EmberENV;
+    </script>
+    <script src="assets/vendor.js"></script>
+    <script src="assets/ember-router-layer.js"></script>
+    <script>
+      window.EmberRouterLayer = require('ember-router-layer/app')['default'].create(EmberRouterLayerENV.APP);
+    </script>
+  </body>
+</html>
