@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="assets/ember-router-layer.css">
   </head>
   <body>
+      <a href="/posts/20">Post 20</a>
     <script>
       window.EmberRouterLayerENV = {{ENV}};
       window.EmberENV = window.EmberRouterLayerENV.EmberENV;
@@ -20,7 +21,35 @@
     <script src="assets/vendor.js"></script>
     <script src="assets/ember-router-layer.js"></script>
     <script>
-      window.EmberRouterLayer = require('ember-router-layer/app')['default'].create(EmberRouterLayerENV.APP);
+      window.App = require('ember-router-layer/app-generator')['default']({
+        map: function(){
+          this.resource('posts', function(){
+            this.route('new');
+            this.resource('post', {path: ':post_id'}, function(){
+              this.route('view', {path: 'view/:post_id'});
+              this.route('edit', {path: 'edit/:post_id'});
+            })
+          });
+        },
+        callbacks : {
+          'posts' : function(queryParams){
+              alert('You are in "posts" path')
+          },
+          'posts/new' : function(queryParams) {
+            alert('You are in "posts/new" path');
+          },
+          'post/index' : function(id, queryParams) {
+            alert('You are in "posts/post" with id ' + id);
+          },
+          'post/view' : function(id, queryParams) {
+            alert('You are in "posts/view/post" with id ' + id);
+          },
+          'post/edit' : function(id, queryParams) {
+            alert('You are in "posts/view/post" with id ' + id);
+          }
+        }
+      });
+
     </script>
   </body>
 </html>
