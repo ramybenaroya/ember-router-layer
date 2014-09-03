@@ -1,4 +1,5 @@
 (function (globals) {
+	"use strict";
 	var Ember = globals.Ember,
 		DS = globals.DS,
 		$ = globals.jQuery,
@@ -161,22 +162,33 @@
 		generateModel = function () {
 			return DS.Model.extend();
 		},
+		router,
+		initialized = false,
 		emberRouterLayerObject = {
+			navigateTo: function (url) {
+				if (!initialized) {
+					throw 'Ember Router Layer was not initialized. use emberRouterLayer.init function';
+				}
+				router.updateURL(url);
+				router.handleURL(url);
+			},
 			init: function (options) {
 				var path, App, models, RouteMixin, ControllerMixin;
-
+				if (initialized) {
+					throw 'Ember Router Layout was already initialized';
+				}
+				initialized = true;
 				App = globals[options.applicationNamespace || 'EmberRouterLayer'] = Ember.Application.create(options.applicationOptions);
 				App.initializer({
 					name: 'anchors-interceptor',
 					initialize: function (container, application) {
-						var router = application.Router.router;
+						router = application.Router.router;
 						$(function () {
 							$(document).on('click', options.anchorsSelector || 'a', function () {
 								var $a = $(this),
 									href = $a.attr('href');
 								if (href && href[0] === '/') {
-									router.updateURL(href);
-									router.handleURL(href);
+									emberRouterLayerObject.navigateTo(href);
 									return false;
 								} else {
 									return true;
@@ -204,7 +216,7 @@
 					App[(path.replace(/\//g, '_') + '_route').classify()] = generateRoute(path, options, RouteMixin, this);
 					App[(path.replace(/\//g, '_') + '_controller').classify()] = generateController(ControllerMixin);
 				}
-				
+
 				return App;
 			}
 		},
@@ -216,7 +228,7 @@
 			throw 'Ember Router Layer is missing Ember dependency';
 		}
 		if (!globals.DS) {
-			throw 'Ember Router Layer is missing Ember-Data dependency';	
+			throw 'Ember Router Layer is missing Ember-Data dependency';
 		}
 		if (!globals.jQuery) {
 			throw 'Ember Router Layer is missing jQuery dependency';
