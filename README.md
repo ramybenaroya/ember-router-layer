@@ -47,7 +47,7 @@ window.emberRouterLayer.init({
 		'comments': function(params, queryParams) {
 			var postId = params.post_id;
 			//The legacy app function which is responsible handling 'posts/{post_id}/comments' 
-			legacyHandleComment(postId, commentId, queryParams); path
+			legacyHandleComments(postId, commentId, queryParams); path
 		}
 		'comment': function(params, queryParams) {
 			var postId = params.post_id;
