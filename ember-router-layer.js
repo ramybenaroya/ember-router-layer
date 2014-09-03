@@ -169,6 +169,9 @@
 				if (!initialized) {
 					throw 'Ember Router Layer was not initialized. use emberRouterLayer.init function';
 				}
+				if (!router) {
+					throw 'Something wend wrong. Cannot find Ember-Router-Layer router instance';
+				}
 				router.updateURL(url);
 				router.handleURL(url);
 			},
