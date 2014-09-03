@@ -17,7 +17,7 @@ download & include `ember-router-layer.js` in your application.
 
 Here's a classic example of posts with comments paths:
 ```javascript
-emberRouterLayer.init({
+window.emberRouterLayer.init({
 	map: function(){
 		this.resource('posts', {path: 'posts'}, function(){
 			this.route('new', {path: 'new'});
