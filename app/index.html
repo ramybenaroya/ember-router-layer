@@ -15,7 +15,7 @@
   <body>
       <a href="/posts/20?aaa=111">Post 20</a>
       <a href="/posts/10/view?bbb=111">Post 10</a>
-      <a href="/posts/10/view?bbb=222">Post 10</a>
+      <a href="/posts/10/40?bbb=222">Post 10 - Comment 40</a>
     <script>
       window.EmberRouterLayerENV = {{ENV}};
       window.EmberENV = window.EmberRouterLayerENV.EmberENV;
@@ -30,6 +30,7 @@
             this.resource('post', {path: ':post_id'}, function(){
               this.route('view', {path: 'view'});
               this.route('edit', {path: 'edit'});
+              this.resource('comment', {path: ':comment_id'});
             })
           });
         },
@@ -40,14 +41,17 @@
           'posts/new' : function(queryParams) {
             alert('You are in "posts/new" path. query params: ' + JSON.stringify(queryParams));
           },
-          'post/index' : function(id, queryParams) {
-            alert('You are in "posts/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
+          'post/index' : function(params, queryParams) {
+            alert('You are in "posts/post" with id ' + params.post_id + '. query params: ' + JSON.stringify(queryParams));
           },
-          'post/view' : function(id, queryParams) {
-            alert('You are in "posts/view/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
+          'post/view' : function(params, queryParams) {
+            alert('You are in "posts/view/post" with id ' + params.post_id + '. query params: ' + JSON.stringify(queryParams));
           },
-          'post/edit' : function(id, queryParams) {
-            alert('You are in "posts/view/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
+          'post/edit' : function(params, queryParams) {
+            alert('You are in "posts/view/post" with id ' + params.post_id + '. query params: ' + JSON.stringify(queryParams));
+          },
+          'comment': function(params, queryParams) {
+            alert('You are in "posts/post/comment" with post id ' + params.post_id + ' and comment id ' + params.comment_id + '. query params: ' + JSON.stringify(queryParams));
           }
         },
         queryParams : ['aaa', 'bbb'] 

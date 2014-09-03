@@ -10,14 +10,13 @@ var generateRouteAMDCallback = function (path, options, RouteMixin, router) {
 			__exports__['default'] = Em.Route.extend(RouteMixin, {
 				afterModel: function (resolvedModel, transition) {
 					debugger;
-					var id;
+					var param,
+						params = {};
+					for (param in transition.params){
+						Em.merge(params, transition.params[param]);
+					}
 					if (path.replace(/\//g, '.') === transition.targetName){
-						id = resolvedModel ? Em.get(resolvedModel, 'id') : undefined;
-						if (typeof id !== 'undefined') {
-							callback.call(router, id, transition.queryParams);
-						} else {
-							callback.call(router, transition.queryParams);
-						}	
+						callback.call(router, params, transition.queryParams);	
 					}
 				}
 			});
