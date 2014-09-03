@@ -204,8 +204,7 @@
 					App[(path.replace(/\//g, '_') + '_route').classify()] = generateRoute(path, options, RouteMixin, this);
 					App[(path.replace(/\//g, '_') + '_controller').classify()] = generateController(ControllerMixin);
 				}
-
-				Ember.TEMPLATES["application"] = Ember.Handlebars.compile('');
+				
 				return App;
 			}
 		},
