@@ -13,8 +13,9 @@ In addition all anchors clicks will be intercepted, so you can use the same path
 - jQuery
 
 ## Usage ##
-download & include `ember-router-layer.js` in your application
+download & include `ember-router-layer.js` in your application.
 
+Here's a classic example of posts with comments paths:
 ```javascript
 emberRouterLayer.init({
 	map: function(){
@@ -31,26 +32,32 @@ emberRouterLayer.init({
 	},
 	callbacks: {
 		'posts': function(params, queryParams){
-			legacyHandlePosts(); //The legacy app function which is responsible handling 'posts' path
+			//The legacy app function which is responsible handling 'posts' path
+			legacyHandlePosts(queryParams); 
 		},
 		'posts/new': function(params, queryParams){
-			legacyHandleNewPost(); //The legacy app function which is responsible handling 'posts/new' path
+			//The legacy app function which is responsible handling 'posts/new' path
+			legacyHandleNewPost(queryParams); 
 		},
 		'post': function(params, queryParams){
 			var postId = params.post_id;
-			legacyHandlePost(postId); //The legacy app function which is responsible handling 'posts/{post_id}' path
+			//The legacy app function which is responsible handling 'posts/{post_id}' path
+			legacyHandlePost(postId, queryParams); 
 		},
 		'comments': function(params, queryParams) {
 			var postId = params.post_id;
-			legacyHandleComment(postId, commentId); //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
+			//The legacy app function which is responsible handling 'posts/{post_id}/comments' 
+			legacyHandleComment(postId, commentId, queryParams); path
 		}
 		'comment': function(params, queryParams) {
 			var postId = params.post_id;
-			legacyHandleComment(postId, commentId); //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
+			//The legacy app function which is responsible handling 'posts/{post_id}/{comment_
+			legacyHandleComment(postId, commentId, queryParams); id}' path
 		}
 		'comments/new': function(params, queryParams) {
 			var postId = params.post_id;
-			legacyHandleNewComment(postId); //The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
+			//The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
+			legacyHandleNewComment(postId, queryParams); 
 		}
 	};
 });
