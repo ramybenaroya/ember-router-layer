@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="assets/ember-router-layer.css">
   </head>
   <body>
-      <a href="/posts/20">Post 20</a>
+      <a href="/posts/20?aaa=111">Post 20</a>
+      <a href="/posts/10/view?bbb=111">Post 10</a>
+      <a href="/posts/10/view?bbb=222">Post 10</a>
     <script>
       window.EmberRouterLayerENV = {{ENV}};
       window.EmberENV = window.EmberRouterLayerENV.EmberENV;
@@ -26,28 +28,29 @@
           this.resource('posts', function(){
             this.route('new');
             this.resource('post', {path: ':post_id'}, function(){
-              this.route('view', {path: 'view/:post_id'});
-              this.route('edit', {path: 'edit/:post_id'});
+              this.route('view', {path: 'view'});
+              this.route('edit', {path: 'edit'});
             })
           });
         },
         callbacks : {
           'posts' : function(queryParams){
-              alert('You are in "posts" path')
+              alert('You are in "posts" path. query params: ' + JSON.stringify(queryParams))
           },
           'posts/new' : function(queryParams) {
-            alert('You are in "posts/new" path');
+            alert('You are in "posts/new" path. query params: ' + JSON.stringify(queryParams));
           },
           'post/index' : function(id, queryParams) {
-            alert('You are in "posts/post" with id ' + id);
+            alert('You are in "posts/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
           },
           'post/view' : function(id, queryParams) {
-            alert('You are in "posts/view/post" with id ' + id);
+            alert('You are in "posts/view/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
           },
           'post/edit' : function(id, queryParams) {
-            alert('You are in "posts/view/post" with id ' + id);
+            alert('You are in "posts/view/post" with id ' + id + '. query params: ' + JSON.stringify(queryParams));
           }
-        }
+        },
+        queryParams : ['aaa', 'bbb'] 
       });
 
     </script>
