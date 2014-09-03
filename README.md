@@ -22,7 +22,7 @@ you can also use the following:
 <script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
 "></script>
 ```
-Here's a classic example of posts with comments paths:
+Here's a classic example of posts & comments application paths:
 ```javascript
 window.emberRouterLayer.init({
 	map: function(){
