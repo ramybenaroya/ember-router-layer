@@ -19,7 +19,8 @@ download & include `ember-router-layer.js` in your application.
 
 you can also use the following:
 ```html
-<script src="//cdn.rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js"></script>
+<script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
+"></script>
 ```
 Here's a classic example of posts with comments paths:
 ```javascript
