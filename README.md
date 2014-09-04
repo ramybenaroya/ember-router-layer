@@ -15,6 +15,8 @@ In addition all anchors clicks will be intercepted, so you can use the same path
 - Ember >= 1.7.0
 - Ember-Data >= 1.0.0-Beta.1
 
+## Example App ##
+[http://ramybenaroya.github.io/ember-router-layer](http://ramybenaroya.github.io/ember-router-layer/ "Ember Router Layer Github Pages")
 
 ## Usage ##
 download & include `ember-router-layer.js` in your application.
@@ -122,10 +124,6 @@ window.emberRouterLayer.init({
     }
 });
 ```
-
-## Example App ##
-[http://ramybenaroya.github.io/ember-router-layer](http://ramybenaroya.github.io/ember-router-layer/ "Ember Router Layer Github Pages")
-
 
 ## Methods ##
 ### init ###
