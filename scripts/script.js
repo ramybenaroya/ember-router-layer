@@ -1,6 +1,6 @@
 (function (globals) {
 	"use strict";
-	window.emberRouterLayer.init({
+	globals.emberRouterLayer.init({
 		routerOptions: {
 			rootURL: '/ember-router-layer/',
 			//location can be 'auto', 'hash', 'history', 'none' 
