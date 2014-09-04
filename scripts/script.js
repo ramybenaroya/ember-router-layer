@@ -93,6 +93,7 @@
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
 				globals.alert('Add new comment for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
 			}
-		}
+		},
+		queryParams: ['q1', 'q2']
 	});
 })(this);

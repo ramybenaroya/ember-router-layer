@@ -26,12 +26,18 @@
       <section id="main_content" class="inner">
         <h1>Example App</h1>
         <p>Click on the links and see the URL changes with a proper callback is triggered</p>
-        <a href="/posts/10">Post 10</a>
+        <a href="/posts?q1=value1&q2=value2">/posts?q1=value1&q2=value2</a>
         <br>
-        <a href="/posts/20/comments/1">Post 20, Comment 1</a>
+        <a href="/posts/new?q1=value3&q2=value4">/posts/new?q1=value3&q2=value4</a>
         <br>
-        <a href="/posts/30/comments/new">Post 30, New Comment</a>
-        <hr/>
+        <a href="/posts/10?q1=value5&q2=value6">/posts/10?q1=value5&q2=value6</a>
+        <br>
+        <a href="/posts/20/comments?q1=value7&q2=value8">/posts/20/comments?q1=value7&q2=value8</a>
+        <br>
+        <a href="/posts/20/comments/new?q1=value9&q2=value10">/posts/20/comments/new?q1=value9&q2=value10</a>
+        <br>
+        <a href="/posts/20/comments/1?q1=value11&q2=value12">/posts/20/comments/1?q1=value11&q2=value12</a>
+        <br>
         <p>Here is the code:</p>
         <pre>
             <code class="javascript">
@@ -130,7 +136,8 @@
                 //Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
                 globals.alert('Add new comment for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
             }
-        }
+        },
+        queryParams: ['q1', 'q2']
     });
 })(this);
             </code>
