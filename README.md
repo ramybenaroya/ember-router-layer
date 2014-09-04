@@ -19,7 +19,7 @@ In addition all anchors clicks will be intercepted, so you can use the same path
 [http://ramybenaroya.github.io/ember-router-layer](http://ramybenaroya.github.io/ember-router-layer/ "Ember Router Layer Github Pages")
 
 ## Usage ##
-download & include `ember-router-layer.js` in your application.
+Download and include `ember-router-layer.js` in your application.
 
 you can also use the following:
 ```html
@@ -140,11 +140,11 @@ Available options are :
 + `queryParams` **Array** (default : `[]`) - List of expected valid query params (strings)
 + `anchorsSelector` **String** (default: `'a'`) - Anchors to intercept their click events
 
-Note: The callback `options.callbacks['*']` will be triggered on any path
+Note: The callback `options.callbacks['*']` will be triggered on any path.
 
 ### navigateTo ###
 `emberRouterLayer.navigateTo(path)`
-Navigates to a path by using the Ember Router Layer. You can use this method to redirect to an inner app path, or even redirect from path to another by invoking the method within a path callback
+Navigates to a path by using the Ember Router Layer. You can use this method to redirect to an inner app path, or even redirect from path to another by invoking the method within a path callback.
 
 The MIT License
 ===============
