@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Ember Router Layer" />
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="lib/codemirror/codemirror.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/styles/default.min.css">
     <title>Ember Router Layer</title>
   </head>
   <body>
@@ -37,7 +37,8 @@
     <div class="outer">
       <section class="inner">
         <p>Here is the code:</p>
-        <textarea id="code_example">
+        <pre>
+            <code class="javascript">
 (function (globals) {
     "use strict";
     window.emberRouterLayer.init({
@@ -136,6 +137,8 @@
         }
     });
 })(this);
+            </code>
+        </pre>
         </textarea>
       </section>
       <!-- FOOTER  -->
@@ -152,15 +155,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.8/ember-data.min.js"></script>
     <script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
     "></script>
-    <script src="lib/codemirror/codemirror.js"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.2/highlight.min.js"></script>
     <script src="scripts/script.js"></script>
     <script>
-      CodeMirror.fromTextArea($('#code_example').get(0), {
-        lineNumbers: true,
-        matchBrackets: true,
-        continueComments: "Enter",
-        extraKeys: {"Ctrl-Q": "toggleComment"}
-      });
+      hljs.initHighlightingOnLoad();
     </script>
   </body>
 </html>
