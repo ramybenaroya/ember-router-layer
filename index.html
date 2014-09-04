@@ -52,43 +52,43 @@
         },
         map: function () {
 
-            //actual path: 'app-root/posts'
+            //actual path: 'ember-router-layer/posts'
             this.resource('posts', {
                 path: 'posts'
             }, function () {
 
-                //actual path: 'app-root/posts/new'
+                //actual path: 'ember-router-layer/posts/new'
                 this.route('new', {
                     path: 'new'
                 });
 
-                //actual path: 'app-root/posts/{post_id}'
+                //actual path: 'ember-router-layer/posts/{post_id}'
                 this.resource('post', {
                     path: ':post_id'
                 }, function () {
 
-                    //actual path: 'app-root/posts/{post_id}/edit'
+                    //actual path: 'ember-router-layer/posts/{post_id}/edit'
                     this.route('edit', {
                         path: 'edit'
                     });
 
-                    //actual path: 'app-root/posts/{post_id}/comments'
+                    //actual path: 'ember-router-layer/posts/{post_id}/comments'
                     this.resource('comments', {
                         path: 'comments'
                     }, function () {
 
-                        //actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
+                        //actual path: 'ember-router-layer/posts/{post_id}/comments/{comment_id}'
                         this.resource('comment', {
                             path: ':comment_id'
                         }, function () {
 
-                            //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
+                            //actual path: 'ember-router-layer/posts/{post_id}/comments/{comment_id}/edit'
                             this.route('edit', {
                                 path: 'edit'
                             });
                         });
 
-                        //actual path: 'app-root/posts/{post_id}/comments/new'
+                        //actual path: 'ember-router-layer/posts/{post_id}/comments/new'
                         this.route('new', {
                             path: 'new'
                         });
