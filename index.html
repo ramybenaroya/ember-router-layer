@@ -49,10 +49,11 @@
                       this.resource('comments', {path: 'comments'}, function(){
 
                           //actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
-                          this.resource('comment', {path: ':comment_id'});
+                          this.resource('comment', {path: ':comment_id'}, function(){
 
-                          //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
-                          this.route('edit', {path: 'edit'});
+                            //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
+                            this.route('edit', {path: 'edit'});  
+                          });
 
                           //actual path: 'app-root/posts/{post_id}/comments/new'
                           this.route('new', {path: 'new'});
