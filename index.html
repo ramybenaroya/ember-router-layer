@@ -58,7 +58,7 @@
               });
           },
           callbacks: {
-              'posts': function(pathParams, queryParams){
+              'posts/index': function(pathParams, queryParams){
                   //The legacy app function which is responsible handling 'posts' path
                   legacyHandlePosts(queryParams); 
               },
@@ -66,17 +66,17 @@
                   //The legacy app function which is responsible handling 'posts/new' path
                   legacyHandleNewPost(queryParams); 
               },
-              'post': function(pathParams, queryParams){
+              'post/index': function(pathParams, queryParams){
                   var postId = pathParams.post_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}' path
                   legacyHandlePost(postId, queryParams); 
               },
-              'comments': function(pathParams, queryParams) {
+              'comments/index': function(pathParams, queryParams) {
                   var postId = pathParams.post_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
                   legacyHandleComments(postId, commentId, queryParams);
               },
-              'comment': function(pathParams, queryParams) {
+              'comment/index': function(pathParams, queryParams) {
                   var postId = pathParams.post_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
                   legacyHandleComment(postId, commentId, queryParams); id}
