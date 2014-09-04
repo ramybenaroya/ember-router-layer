@@ -2,6 +2,7 @@
 	"use strict";
 	globals.emberRouterLayer.init({
 		routerOptions: {
+			//Here you can define your app root URL
 			rootURL: '/ember-router-layer/',
 			//location can be 'auto', 'hash', 'history', 'none' 
 			location: 'history' //default
