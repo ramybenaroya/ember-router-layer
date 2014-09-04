@@ -20,80 +20,101 @@
     <script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
 "></script>
     <script>
-
-    legacyHandlePosts = legacyHandlePost = legacyHandleComments = legacyHandleComment = legacyHandleNewPost = legacyHandleNewComment = function(){
-      arguments.toJSON = [];
-    		alert('Arguments :' + JSON.stringify(arguments));
-    	}	
-
       window.emberRouterLayer.init({
-          routerOptions : {
+          routerOptions: {
               rootURL: '/ember-router-layer/',
               //location can be 'auto', 'hash', 'history', 'none' 
-              location : 'history' //default
+              location: 'history' //default
           },
-          map: function(){
+          map: function () {
 
               //actual path: 'app-root/posts'
-              this.resource('posts', {path: 'posts'}, function(){
+              this.resource('posts', {
+                  path: 'posts'
+              }, function () {
 
                   //actual path: 'app-root/posts/new'
-                  this.route('new', {path: 'new'});
+                  this.route('new', {
+                      path: 'new'
+                  });
 
                   //actual path: 'app-root/posts/{post_id}'
-                  this.resource('post', {path: ':post_id'}, function(){
+                  this.resource('post', {
+                      path: ':post_id'
+                  }, function () {
 
                       //actual path: 'app-root/posts/{post_id}/edit'
-                      this.route('edit', {path: 'edit'});
+                      this.route('edit', {
+                          path: 'edit'
+                      });
 
                       //actual path: 'app-root/posts/{post_id}/comments'
-                      this.resource('comments', {path: 'comments'}, function(){
+                      this.resource('comments', {
+                          path: 'comments'
+                      }, function () {
 
                           //actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
-                          this.resource('comment', {path: ':comment_id'}, function(){
+                          this.resource('comment', {
+                              path: ':comment_id'
+                          }, function () {
 
-                            //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
-                            this.route('edit', {path: 'edit'});  
+                              //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
+                              this.route('edit', {
+                                  path: 'edit'
+                              });
                           });
 
                           //actual path: 'app-root/posts/{post_id}/comments/new'
-                          this.route('new', {path: 'new'});
+                          this.route('new', {
+                              path: 'new'
+                          });
                       });
                   });
               });
           },
           callbacks: {
-              'posts': function(pathParams, queryParams){
-                  //The legacy app function which is responsible handling 'posts' path
-                  legacyHandlePosts(queryParams); 
+              'posts/index': function (pathParams, queryParams) {
+                  //Here should be the legacy app function which is responsible handling 'posts' path
+                  alert('Show all posts. queryParams : ' + JSON.stringify(queryParams));
               },
-              'posts/new': function(pathParams, queryParams){
-                  //The legacy app function which is responsible handling 'posts/new' path
-                  legacyHandleNewPost(queryParams); 
+              'posts/new': function (pathParams, queryParams) {
+                  //Here should be the legacy app function which is responsible handling 'posts/new' path
+                  alert('Add new post. queryParams : ' + JSON.stringify(queryParams))
               },
-              'post/index': function(pathParams, queryParams){
+              'post/index': function (pathParams, queryParams) {
                   var postId = pathParams.post_id;
-                  //The legacy app function which is responsible handling 'posts/{post_id}' path
-                  legacyHandlePost(postId, queryParams); 
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}' path
+                  alert('Show post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
               },
-              'comments': function(pathParams, queryParams) {
+              'post/edit': function (pathParams, queryParams) {
                   var postId = pathParams.post_id;
-                  //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
-                  legacyHandleComments(postId, queryParams);
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}/edit' path
+                  alert('Edit post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
               },
-              'comment/index': function(pathParams, queryParams) {
+              'comments/index': function (pathParams, queryParams) {
+                  var postId = pathParams.post_id;
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments' path
+                  alert('Show comments for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+              },
+              'comment/index': function (pathParams, queryParams) {
                   var postId = pathParams.post_id,
-                    commentId = pathParams.comment_id;
-                  //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
-                  legacyHandleComment(postId, commentId, queryParams);
+                      commentId = pathParams.comment_id;
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
+                  alert('Show comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
               },
-              'comments/new': function(pathParams, queryParams) {
+              'comment/edit': function (pathParams, queryParams) {
+                  var postId = pathParams.post_id,
+                      commentId = pathParams.comment_id;
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}/{comment_id}/edit' path
+                  alert('Edit comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+              },
+              'comments/new': function (pathParams, queryParams) {
                   var postId = pathParams.post_id;
-                  //The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
-                  legacyHandleNewComment(postId, queryParams); 
+                  //Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
+                  alert('Add new comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
               }
           }
-        });
+      });
     </script>
   </body>
 </html>
