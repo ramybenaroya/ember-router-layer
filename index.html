@@ -20,7 +20,7 @@
     <script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
 "></script>
     <script>
-      window.emberRouterLayer.init({
+            window.emberRouterLayer.init({
           routerOptions: {
               rootURL: '/ember-router-layer/',
               //location can be 'auto', 'hash', 'history', 'none' 
@@ -79,7 +79,7 @@
               },
               'posts/new': function (pathParams, queryParams) {
                   //Here should be the legacy app function which is responsible handling 'posts/new' path
-                  alert('Add new post. queryParams : ' + JSON.stringify(queryParams))
+                  alert('Add new post. queryParams : ' + JSON.stringify(queryParams));
               },
               'post/index': function (pathParams, queryParams) {
                   var postId = pathParams.post_id;
@@ -111,7 +111,7 @@
               'comments/new': function (pathParams, queryParams) {
                   var postId = pathParams.post_id;
                   //Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
-                  alert('Add new comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+                  alert('Add new comment for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
               }
           }
       });
