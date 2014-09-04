@@ -3,6 +3,17 @@
 	var Ember = globals.Ember,
 		DS = globals.DS,
 		$ = globals.jQuery,
+		defaultOptions = {
+			applicationNamespace: 'EmberRouterLayer',
+			applicationOptions: {},
+			routerOptions: {
+				location: 'history'
+			},
+			map: Ember.K,
+			callbacks: {},
+			queryParams: [],
+			anchorsSelector: 'a'
+		},
 		CustomDSL = (function () {
 			var modelsToGenerate = [];
 
@@ -115,18 +126,18 @@
 			return Ember.Route.extend(RouteMixin, {
 				afterModel: function (resolvedModel, transition) {
 					var param,
-						params = {};
+						pathParams = {};
 					for (param in transition.params) {
-						Ember.merge(params, transition.params[param]);
+						Ember.merge(pathParams, transition.params[param]);
 					}
 					if (path.replace(/\//g, '.') === transition.targetName) {
-						callback.call(router, params, transition.queryParams);
+						callback.call(this, pathParams, transition.queryParams);
 					}
 				}
 			});
 		},
 		generateQueryParamsRouteMixin = function (options) {
-			var queryParams = options.queryParams || [],
+			var queryParams = options.queryParams,
 				mixinContent = {
 					queryParams: {}
 				};
@@ -141,7 +152,7 @@
 			return Ember.Controller.extend(ControllerMixin);
 		},
 		generateQueryParamsControllerMixin = function (options) {
-			var queryParams = options.queryParams || [],
+			var queryParams = options.queryParams,
 				mixinContent = {
 					queryParams: Ember.copy(queryParams)
 				};
@@ -167,10 +178,10 @@
 		emberRouterLayerObject = {
 			navigateTo: function (url) {
 				if (!initialized) {
-					throw 'Ember Router Layer was not initialized. use emberRouterLayer.init function';
+					throw 'Ember Router Layer was not initialized. use emberRouterLayer.init function.';
 				}
 				if (!router) {
-					throw 'Something wend wrong. Cannot find Ember-Router-Layer router instance';
+					throw 'Something went wrong. Cannot find Ember-Router-Layer router instance.';
 				}
 				router.updateURL(url);
 				router.handleURL(url);
@@ -181,13 +192,14 @@
 					throw 'Ember Router Layout was already initialized';
 				}
 				initialized = true;
-				App = globals[options.applicationNamespace || 'EmberRouterLayer'] = Ember.Application.create(options.applicationOptions);
+				options = $.extend(true, {}, options, defaultOptions);
+				App = globals[options.applicationNamespace] = Ember.Application.create(options.applicationOptions);
 				App.initializer({
 					name: 'anchors-interceptor',
 					initialize: function (container, application) {
 						router = application.Router.router;
 						$(function () {
-							$(document).on('click', options.anchorsSelector || 'a', function () {
+							$(document).on('click', options.anchorsSelector, function () {
 								var $a = $(this),
 									href = $a.attr('href');
 								if (href && href[0] === '/') {
@@ -201,9 +213,7 @@
 					}
 				});
 
-				App.Router = Ember.Router.extend(Ember.merge({
-					location: 'history'
-				}, options.routerOptions));
+				App.Router = Ember.Router.extend(options.routerOptions);
 
 				App.Router.map(options.map);
 
@@ -227,13 +237,13 @@
 			return emberRouterLayerObject;
 		};
 	if (!globals.emberRouterLayer) {
-		if (!globals.Ember) {
+		if (!Ember) {
 			throw 'Ember Router Layer is missing Ember dependency';
 		}
-		if (!globals.DS) {
+		if (!DS) {
 			throw 'Ember Router Layer is missing Ember-Data dependency';
 		}
-		if (!globals.jQuery) {
+		if (!$) {
 			throw 'Ember Router Layer is missing jQuery dependency';
 		}
 		if (typeof globals.define === 'function') {
