@@ -21,8 +21,9 @@
 "></script>
     <script>
 
-    legacyHandlePosts = legacyHandlePost = legacyHandleComments = legacyHandleComment = legacyHandleNewPost = legacyHandleNewComment = function(pathParams, queryParams){
-    		alert('path params : ' + JSON.stringify(pathParams) +'; query params: ' + JSON.stringify(queryParams));
+    legacyHandlePosts = legacyHandlePost = legacyHandleComments = legacyHandleComment = legacyHandleNewPost = legacyHandleNewComment = function(){
+      arguments.toJSON = [];
+    		alert('Arguments :' + JSON.stringify(arguments));
     	}	
 
       window.emberRouterLayer.init({
@@ -78,10 +79,11 @@
               'comments': function(pathParams, queryParams) {
                   var postId = pathParams.post_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
-                  legacyHandleComments(postId, commentId, queryParams);
+                  legacyHandleComments(postId, queryParams);
               },
               'comment/index': function(pathParams, queryParams) {
-                  var postId = pathParams.post_id;
+                  var postId = pathParams.post_id,
+                    commentId = pathParams.comment_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
                   legacyHandleComment(postId, commentId, queryParams); id}
               },
