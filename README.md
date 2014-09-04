@@ -10,9 +10,11 @@ Thus, there is no need in refactoring any logic code. All you need to do is impl
 In addition all anchors clicks will be intercepted, so you can use the same paths which you choose to define.
 
 ## Dependencies ##
-- Ember
-- Ember-Data
 - jQuery
+- Handlebars 1.3.0
+- Ember >= 1.7.0
+- Ember-Data >= 1.0.0-Beta.1
+
 
 ## Usage ##
 download & include `ember-router-layer.js` in your application.
@@ -120,6 +122,10 @@ window.emberRouterLayer.init({
     }
 });
 ```
+
+## Example App ##
+[http://ramybenaroya.github.io/ember-router-layer](http://ramybenaroya.github.io/ember-router-layer/ "Ember Router Layer Github Pages")
+
 
 ## Methods ##
 ### init ###
