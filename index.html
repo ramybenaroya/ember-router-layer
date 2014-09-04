@@ -52,16 +52,16 @@
                           this.resource('comment', {path: ':comment_id'});
 
                           //actual path: 'app-root/posts/{post_id}/comments/{comment_id}/edit'
-                          this.resource('comment', {path: 'edit'})
+                          this.route('edit', {path: 'edit'});
 
                           //actual path: 'app-root/posts/{post_id}/comments/new'
                           this.route('new', {path: 'new'});
-                      })
-                  })
+                      });
+                  });
               });
           },
           callbacks: {
-              'posts/index': function(pathParams, queryParams){
+              'posts': function(pathParams, queryParams){
                   //The legacy app function which is responsible handling 'posts' path
                   legacyHandlePosts(queryParams); 
               },
@@ -74,7 +74,7 @@
                   //The legacy app function which is responsible handling 'posts/{post_id}' path
                   legacyHandlePost(postId, queryParams); 
               },
-              'comments/index': function(pathParams, queryParams) {
+              'comments': function(pathParams, queryParams) {
                   var postId = pathParams.post_id;
                   //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
                   legacyHandleComments(postId, commentId, queryParams);
