@@ -25,67 +25,82 @@ you can also use the following:
 Here's a classic example of posts & comments application paths:
 ```javascript
 window.emberRouterLayer.init({
-	routerOptions : {
-		rootURL: '/app-root/',
-		//location can be 'auto', 'hash', 'history', 'none' 
-		location : 'history' //default
-	}
-	map: function(){
+    routerOptions: {
+        rootURL: '/ember-router-layer/',
+        //location can be 'auto', 'hash', 'history', 'none' 
+        location: 'history' //default
+    },
+    map: function () {
 
-		//actual path: 'app-root/posts'
-		this.resource('posts', {path: 'posts'}, function(){
+        //actual path: 'app-root/posts'
+        this.resource('posts', {
+            path: 'posts'
+        }, function () {
 
-			//actual path: 'app-root/posts/new'
-			this.route('new', {path: 'new'});
+            //actual path: 'app-root/posts/new'
+            this.route('new', {
+                path: 'new'
+            });
 
-			//actual path: 'app-root/posts/{post_id}'
-			this.resource('post', {path: ':post_id'}, function(){
-				
-				//actual path: 'app-root/posts/{post_id}/edit'
-				this.route('edit', {path: 'edit'});
+            //actual path: 'app-root/posts/{post_id}'
+            this.resource('post', {
+                path: ':post_id'
+            }, function () {
 
-				//actual path: 'app-root/posts/{post_id}/comments'
-				this.resource('comments', {path: 'comment'}, function(){
+                //actual path: 'app-root/posts/{post_id}/edit'
+                this.route('edit', {
+                    path: 'edit'
+                });
 
-					//actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
-					this.resource('comment', {path: ':comment_id'})
+                //actual path: 'app-root/posts/{post_id}/comments'
+                this.resource('comments', {
+                    path: 'comment'
+                }, function () {
 
-					//actual path: 'app-root/posts/{post_id}/comments/new'
-					this.route('new', {path: 'new'});
-				})
-			})
-		});
-	},
-	callbacks: {
-		'posts': function(pathParams, queryParams){
-			//The legacy app function which is responsible handling 'posts' path
-			legacyHandlePosts(queryParams); 
-		},
-		'posts/new': function(pathParams, queryParams){
-			//The legacy app function which is responsible handling 'posts/new' path
-			legacyHandleNewPost(queryParams); 
-		},
-		'post': function(pathParams, queryParams){
-			var postId = pathParams.post_id;
-			//The legacy app function which is responsible handling 'posts/{post_id}' path
-			legacyHandlePost(postId, queryParams); 
-		},
-		'comments': function(pathParams, queryParams) {
-			var postId = pathParams.post_id;
-			//The legacy app function which is responsible handling 'posts/{post_id}/comments' path
-			legacyHandleComments(postId, commentId, queryParams);
-		}
-		'comment': function(pathParams, queryParams) {
-			var postId = pathParams.post_id;
-			//The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
-			legacyHandleComment(postId, commentId, queryParams); id}
-		}
-		'comments/new': function(pathParams, queryParams) {
-			var postId = pathParams.post_id;
-			//The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
-			legacyHandleNewComment(postId, queryParams); 
-		}
-	};
+                    //actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
+                    this.resource('comment', {
+                        path: ':comment_id'
+                    })
+
+                    //actual path: 'app-root/posts/{post_id}/comments/new'
+                    this.route('new', {
+                        path: 'new'
+                    });
+                });
+            });
+        });
+    },
+    callbacks: {
+        'posts': function (pathParams, queryParams) {
+            //The legacy app function which is responsible handling 'posts' path
+            legacyHandlePosts(queryParams);
+        },
+        'posts/new': function (pathParams, queryParams) {
+            //The legacy app function which is responsible handling 'posts/new' path
+            legacyHandleNewPost(queryParams);
+        },
+        'post': function (pathParams, queryParams) {
+            var postId = pathParams.post_id;
+            //The legacy app function which is responsible handling 'posts/{post_id}' path
+            legacyHandlePost(postId, queryParams);
+        },
+        'comments': function (pathParams, queryParams) {
+            var postId = pathParams.post_id;
+            //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
+            legacyHandleComments(postId, commentId, queryParams);
+        },
+        'comment': function (pathParams, queryParams) {
+            var postId = pathParams.post_id;
+            //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
+            legacyHandleComment(postId, commentId, queryParams);
+            id
+        }
+    },
+    'comments/new': function (pathParams, queryParams) {
+        var postId = pathParams.post_id;
+        //The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
+        legacyHandleNewComment(postId, queryParams);
+    }
 });
 ```
 
