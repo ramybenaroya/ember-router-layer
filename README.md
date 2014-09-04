@@ -26,7 +26,7 @@ Here's a classic example of posts & comments application paths:
 ```javascript
 window.emberRouterLayer.init({
     routerOptions: {
-        rootURL: '/ember-router-layer/',
+        rootURL: '/app-root/',
         //location can be 'auto', 'hash', 'history', 'none' 
         location: 'history' //default
     },
