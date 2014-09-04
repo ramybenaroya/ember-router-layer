@@ -156,12 +156,10 @@
     <script src="scripts/script.js"></script>
     <script>
       CodeMirror.fromTextArea($('#code_example').get(0), {
-        mode: "javascript",
         lineNumbers: true,
-        lineWrapping: true,
-        extraKeys: {"Ctrl-Q": function(cm){ cm.foldCode(cm.getCursor()); }},
-        foldGutter: true,
-        gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
+        matchBrackets: true,
+        continueComments: "Enter",
+        extraKeys: {"Ctrl-Q": "toggleComment"}
       });
     </script>
   </body>
