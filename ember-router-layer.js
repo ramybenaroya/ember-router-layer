@@ -184,7 +184,7 @@
 					throw 'Ember Router Layout was already initialized';
 				}
 				initialized = true;
-				options = $.extend(true, {}, options, defaultOptions);
+				options = $.extend(true, {}, defaultOptions, options);
 				App = globals[options.applicationNamespace] = Ember.Application.create(options.applicationOptions);
 				App.initializer({
 					name: 'anchors-interceptor',
