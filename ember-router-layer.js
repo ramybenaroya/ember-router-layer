@@ -3,17 +3,7 @@
 	var Ember = globals.Ember,
 		DS = globals.DS,
 		$ = globals.jQuery,
-		defaultOptions = {
-			applicationNamespace: 'EmberRouterLayer',
-			applicationOptions: {},
-			routerOptions: {
-				location: 'history'
-			},
-			map: Ember.K,
-			callbacks: {},
-			queryParams: [],
-			anchorsSelector: 'a'
-		},
+		defaultOptions,
 		CustomDSL = (function () {
 			var modelsToGenerate = [];
 
@@ -121,8 +111,9 @@
 			};
 			return CustomDSL;
 		})(),
-		generateRoute = function (path, options, RouteMixin, router) {
-			var callback = options.callbacks[path];
+		generateRoute = function (path, options, RouteMixin) {
+			var callback = options.callbacks[path] || Ember.K,
+				multiCallback = options.callbacks['*'];
 			return Ember.Route.extend(RouteMixin, {
 				afterModel: function (resolvedModel, transition) {
 					var param,
@@ -132,6 +123,7 @@
 					}
 					if (path.replace(/\//g, '.') === transition.targetName) {
 						callback.call(this, pathParams, transition.queryParams);
+						multiCallback.call(this, pathParams, transition.queryParams)
 					}
 				}
 			});
@@ -226,7 +218,7 @@
 					App[(modelPath + 'Model').classify()] = generateModel();
 				});
 				for (path in options.callbacks) {
-					App[(path.replace(/\//g, '_') + '_route').classify()] = generateRoute(path, options, RouteMixin, this);
+					App[(path.replace(/\//g, '_') + '_route').classify()] = generateRoute(path, options, RouteMixin);
 					App[(path.replace(/\//g, '_') + '_controller').classify()] = generateController(ControllerMixin);
 				}
 
@@ -246,9 +238,25 @@
 		if (!$) {
 			throw 'Ember Router Layer is missing jQuery dependency';
 		}
+
+		defaultOptions = {
+			applicationNamespace: 'EmberRouterLayer',
+			applicationOptions: {},
+			routerOptions: {
+				location: 'history'
+			},
+			map: Ember.K,
+			callbacks: {
+				'*': Ember.K
+			},
+			queryParams: [],
+			anchorsSelector: 'a'
+		};
+
 		if (typeof globals.define === 'function') {
 			globals.define('ember-router-layer', [], create);
 		}
+
 		globals.emberRouterLayer = emberRouterLayerObject;
 	}
 })(this);
