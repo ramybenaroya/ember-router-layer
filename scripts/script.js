@@ -56,43 +56,43 @@
 		callbacks: {
 			'posts/index': function (pathParams, queryParams) {
 				//Here should be the legacy app function which is responsible handling 'posts' path
-				globals.alert('Show all posts. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Show all posts.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'posts/new': function (pathParams, queryParams) {
 				//Here should be the legacy app function which is responsible handling 'posts/new' path
-				globals.alert('Add new post. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Add new post.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'post/index': function (pathParams, queryParams) {
 				var postId = pathParams.post_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}' path
-				globals.alert('Show post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Show post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'post/edit': function (pathParams, queryParams) {
 				var postId = pathParams.post_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/edit' path
-				globals.alert('Edit post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Edit post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'comments/index': function (pathParams, queryParams) {
 				var postId = pathParams.post_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments' path
-				globals.alert('Show comments for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Show comments for post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'comment/index': function (pathParams, queryParams) {
 				var postId = pathParams.post_id,
 					commentId = pathParams.comment_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
-				globals.alert('Show comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Show comment with id ' + commentId + ' for post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'comment/edit': function (pathParams, queryParams) {
 				var postId = pathParams.post_id,
 					commentId = pathParams.comment_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/{comment_id}/edit' path
-				globals.alert('Edit comment with id ' + commentId + ' for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Edit comment with id ' + commentId + ' for post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			},
 			'comments/new': function (pathParams, queryParams) {
 				var postId = pathParams.post_id;
 				//Here should be the legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
-				globals.alert('Add new comment for post with id ' + postId + '. queryParams : ' + JSON.stringify(queryParams));
+				globals.alert('Add new comment for post with id ' + postId + '.\nqueryParams : ' + JSON.stringify(queryParams));
 			}
 		},
 		queryParams: ['q1', 'q2']
