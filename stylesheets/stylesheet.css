@@ -168,6 +168,7 @@ pre, code {
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     word-wrap: break-word;
+    box-sizing: border-box;
 }
 
 pre {
