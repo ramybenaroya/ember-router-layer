@@ -1,1 +1,93 @@
-My Github Pages
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ember Router Layer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="assets/vendor.css">
+    <link rel="stylesheet" href="assets/ember-router-layer.css">
+  </head>
+  <body>
+      <a href="/posts/20?aaa=111">Post 20</a>
+      <a href="/posts/10/view?bbb=111">Post 10</a>
+      <a href="/posts/10/40?bbb=222">Post 10 - Comment 40</a>
+  
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ember.js/1.6.1/ember.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ember-data.js/1.0.0-beta.8/ember-data.min.js"></script>
+    <script src="//rawgit.com/ramybenaroya/ember-router-layer/master/ember-router-layer.js
+"></script>
+    <script>
+
+    legacyHandlePosts = legacyHandlePost = legacyHandleComments = legacyHandleComment = legacyHandleNewPost = legacyHandleNewComment = function(params, queryParams){
+    		alert('path params : ' + JSON.stringify(pathParams) +'; query params: ' + JSON.stringify(queryParams));
+    	}	
+
+      window.emberRouterLayer.init({
+          routerOptions : {
+              rootURL: '/app-root/',
+              //location can be 'auto', 'hash', 'history', 'none' 
+              location : 'history' //default
+          }
+          map: function(){
+
+              //actual path: 'app-root/posts'
+              this.resource('posts', {path: 'posts'}, function(){
+
+                  //actual path: 'app-root/posts/new'
+                  this.route('new', {path: 'new'});
+
+                  //actual path: 'app-root/posts/{post_id}'
+                  this.resource('post', {path: ':post_id'}, function(){
+
+                      //actual path: 'app-root/posts/{post_id}/edit'
+                      this.route('edit', {path: 'edit'});
+
+                      //actual path: 'app-root/posts/{post_id}/comments'
+                      this.resource('comments', {path: 'comment'}, function(){
+
+                          //actual path: 'app-root/posts/{post_id}/comments/{comment_id}'
+                          this.resource('comment', {path: ':comment_id'})
+
+                          //actual path: 'app-root/posts/{post_id}/comments/new'
+                          this.route('new', {path: 'new'});
+                      })
+                  })
+              });
+          },
+          callbacks: {
+              'posts': function(pathParams, queryParams){
+                  //The legacy app function which is responsible handling 'posts' path
+                  legacyHandlePosts(queryParams); 
+              },
+              'posts/new': function(pathParams, queryParams){
+                  //The legacy app function which is responsible handling 'posts/new' path
+                  legacyHandleNewPost(queryParams); 
+              },
+              'post': function(pathParams, queryParams){
+                  var postId = pathParams.post_id;
+                  //The legacy app function which is responsible handling 'posts/{post_id}' path
+                  legacyHandlePost(postId, queryParams); 
+              },
+              'comments': function(pathParams, queryParams) {
+                  var postId = pathParams.post_id;
+                  //The legacy app function which is responsible handling 'posts/{post_id}/comments' path
+                  legacyHandleComments(postId, commentId, queryParams);
+              }
+              'comment': function(pathParams, queryParams) {
+                  var postId = pathParams.post_id;
+                  //The legacy app function which is responsible handling 'posts/{post_id}/{comment_id}' path
+                  legacyHandleComment(postId, commentId, queryParams); id}
+              }
+              'comments/new': function(pathParams, queryParams) {
+                  var postId = pathParams.post_id;
+                  //The legacy app function which is responsible handling 'posts/{post_id}/comments/new' path
+                  legacyHandleNewComment(postId, queryParams); 
+              }
+          };
+      });
+    </script>
+  </body>
+</html>
